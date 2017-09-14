@@ -10,9 +10,6 @@ import {
   ActivatedRoute
 } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
-
-// import { ToastService } from './toast/toast.service';
-// import { UserProfileService } from './user-profile.service';
 import { AuthService, } from './auth.service';
 import { RolesService } from './../authorization/roles.service';
 
@@ -56,6 +53,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
           if (!response) { return; }
 
           const hasPermission = this.roleService.hasPermission(response.user.role.name, next.data['routeName']);
+          console.log("Inside canActivate:If :routeName ",response.routeName);
           if (!hasPermission) {
             this.router.navigate(['/login']);
           }
@@ -65,7 +63,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     this.router.navigate(['/login'], { queryParams: { redirectTo: state.url } });
-    // this.toastService.activate(this.deniedMessage);
     return false;
   }
 

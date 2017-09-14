@@ -5,14 +5,12 @@ import { ExceptionService } from './../exception/exception.service';
 import { AppStorage } from './../authentication/app-storage.service';
 import { LoadingService } from './../loading/loading.service';
 import { EndpointService, ApiEndpointType, IApiEndpoint } from '../../../config';
-// import { IModel } from './../../shared/IModel';
 import 'rxjs/Rx';
 
 export interface ApiParam {
     data?: Object;
     queryParams?: Object;
     pathParams?: Object;
-    // query: Object;
 }
 
 export interface Paginator {
@@ -100,10 +98,12 @@ export class ApiService {
 
     private getHeaders(): Headers {
         const token = this.appStorage.get('auth_token');
+        console.log("Inside Api Service: getHeaders",token);
         const requestHeaders = new Headers({ 'Content-Type': 'application/json' });
 
         if (token && !requestHeaders.has('authorization')) {
             requestHeaders.append('authorization', 'Token ' + token);
+            console.log("Inside Api Service: getHeaders",token + "requestHeaders",requestHeaders);
         }
 
         return requestHeaders;

@@ -1,58 +1,55 @@
-<div fxLayout="row" fxLayoutAlign="end center">
-    <button md-fab color="accent" class="fab-add" [routerLink]="['create']">
-      <md-icon>add</md-icon>
-  </button>
-</div>
-<div fxLayout="column" fxLayout.gt-md="row">
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <div class="md-title">User's List</div>
+  </div>
+</md-toolbar>
 
-    <div fxFlex class="table-container mat-elevation-z2">
 
-        <div class="table-header" fxLayout="row" [class.table-condensed]="tableCondensed">
-            <div [style.width.px]="cellWidths[0]"></div>
-            <div [style.width.px]="cellWidths[1]" fxLayout="row" fxLayoutAlign="start center">
-                <span class="name">Name</span>
-            </div>
-            <div [style.width.px]="cellWidths[2]" fxLayout="row" fxLayoutAlign="start center">
-                <span class="name">Email</span>
-            </div>
-            <div [style.width.px]="cellWidths[3]" fxLayout="row" fxLayoutAlign="start center">
-                <span class="name">Phone</span>
-            </div>
-            <div [style.width.px]="cellWidths[4]" fxLayout="row" fxLayoutAlign="start center">
-                <span class="name">Role</span>
-            </div>
-            <div [style.width.px]="cellWidths[5]" fxLayout="row" fxLayoutAlign="start center">
-                <span class="name">Status</span>
-            </div>
-            <div></div>
+
+<md-card>
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <button md-fab color="accent" class="fab-add" [routerLink]="['/create']">
+            <md-icon>add</md-icon>
+        </button>
+      </div>
+    <div style="margin-left: 8px;">
+        <div class="search">
+          <!-- <md-icon>search</md-icon> -->
+          <input type="text" name="search" (ngModelChange)="onSearchUser($event)" [(ngModel)]="searchNameText" placeholder="Search Users...">
+          <!-- <input  type="serch" (ngModelChange)="onSearchUser($event)" [(ngModel)]="searchNameText" placeholder="Search Users..."> -->
         </div>
-
-        <div class="table-content">
-            <table class="table" [class.table-hover]="tableHover" [class.table-striped]="tableStriped" [class.table-condensed]="tableCondensed" [class.table-bordered]="tableBordered">
-                <tbody #tbody>
-                    <tr *ngFor="let user of users ;let i = index;">
-                        <td class="avatar-cell"><img class="avatar" src="assets/img/avatars/{{i+1}}.png"></td>
-                        <td>{{ user.firstName}} {{ user.lastName}}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.phone }}</td>
-                        <td>{{ user.role.label }}</td>
-                        <td>
-                            <div class="source" [class.source-active]="user.isActive" [class.source-inactive]="!user.isActive" fxLayout="row" fxLayoutAlign="center center">
-                                {{ user.isActive ? "Active" :"InActive" }}
-                            </div>
-                        </td>
-                        <td [style.width.px]="90">
-                            <button md-icon-button color="accent" [routerLink]="['/create',user.id,'edit']"><md-icon>edit</md-icon></button>
-                            <button md-icon-button color="accent" (click)="openDialog(user)"><md-icon>delete</md-icon></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div fxLayout="row" *ngIf="totalCount!==0" fxLayoutGap="75" fxLayoutAlign="end" style="background-color:white">
-                <md-paginator [length]="totalCount" [pageSize]="limit" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
-                </md-paginator>
-            </div>
+      </div>
+<div style="overflow-x:auto; padding: 10px;">
+  <table id="myTable">
+    <tr>
+      <th></th>
+      <th (click)="sortTable(0)" style="cursor: pointer;">Name</th>
+      <th (click)="sortTable(1)"style="cursor: pointer;">Email</th>
+      <th (click)="sortTable(2)" style="cursor: pointer;">Phone</th>
+      <th (click)="sortTable(3)" style="cursor: pointer;">Role</th>
+      <th (click)="sortTable(4)" style="cursor: pointer;">Status</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let user of filteredUsers;let i=index;">
+      <td class="avatar-cell"><img class="avatar" src="assets/img/avatars/{{i+1}}.png"></td>
+      <td>{{user.firstName}} {{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.phone}}</td>
+      <td>{{user.role.label}}</td>
+      <td>
+        <div class="source" [class.source-active]="user.isActive" [class.source-inactive]="!user.isActive" fxLayout="row" fxLayoutAlign="center center">
+          {{ user.isActive ? "Active" :"InActive" }}
         </div>
-
-    </div>
+      </td>
+      <td [style.width.px]="90">
+        <button md-icon-button color="accent" [routerLink]="['/create',user.id,'edit']"><md-icon>edit</md-icon></button>
+        <button md-icon-button color="accent" (click)="openDialog(user)"><md-icon>delete</md-icon></button>
+      </td>
+    </tr>
+  </table>
+  <div fxLayout="row" *ngIf="totalCount!==0" fxLayoutGap="75" fxLayoutAlign="end" style="background-color:white">
+    <md-paginator [length]="totalCount" [pageSize]="limit" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+    </md-paginator>
+  </div>
 </div>
+</md-card>

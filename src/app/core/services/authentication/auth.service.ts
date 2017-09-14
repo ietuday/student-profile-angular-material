@@ -119,7 +119,7 @@ export class AuthService {
 
     private saveTokenOnSuccessLogin(response) {
         if (response) {
-            const token = response.token;
+         const token = response.token;
             this.appStorage.save('auth_token', token);
         }
     }

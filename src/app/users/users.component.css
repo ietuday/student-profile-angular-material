@@ -1,4 +1,4 @@
-.fab-add {
+ .fab-add {
     margin-bottom: -20px;
 }
 
@@ -44,7 +44,7 @@ $height__main-toolbar__plus_8px: $height__main-toolbar+8px;
 .avatar-cell {
     text-align: center;
     width: 40px;
-    padding-left: 24px;
+    /* padding-left: 24px; */
     padding-right: 8px;
 }
 
@@ -62,3 +62,84 @@ $height__main-toolbar__plus_8px: $height__main-toolbar+8px;
 .source-inactive {
     background-color: rgb(244, 67, 54);
 }
+
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 1em;
+    overflow: hidden;
+}
+
+th {
+    text-align: left;
+    text-shadow: #f2f2f2;
+    background-color: #4D6D83;
+    color: white;
+    padding: 15px;
+   box-sizing:border-box;
+   border-bottom: 2px solid white; 
+ 
+}
+
+td {
+    padding: 15px;
+    border-bottom: 2px solid white; 
+    background: #f7ecec;
+    
+}
+
+/* tr:hover{background-color:white} */
+
+tr:hover{
+    background:#BDC3C7;
+    color: grey;
+}
+
+
+
+.avatar{
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+
+
+.md-toolbar.md-table-toolbar.alternate.mat-toolbar {
+    color: #1e88e5;
+    background-color: rgb(33,150,243);
+  }
+
+  .md-toolbar.md-table-toolbar.alternate .md-toolbar-tools {
+    font-size: 16px;
+  }
+
+  .mat-toolbar {
+    background: #c5aaaa;
+    color: rgba(0,0,0,.87);
+}
+
+input[type=text] {
+    width: 200px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    /* background-image: url('searchicon.png'); */
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 80%;
+}
+
+

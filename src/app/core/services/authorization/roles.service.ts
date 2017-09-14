@@ -13,35 +13,14 @@ export class RolesService {
 
     private roles = {
         'admin': [
-            { name: 'create-requisition', title: 'Create Requisition', url: '/insurance/create-requisition', avatar: 'local_hospital' },
-            { name: 'dashboard', title: 'Dashboard', url: '/dashboard', avatar: 'dashboard' },
-            { name: 'users', title: 'Users', url: '/users', avatar: 'person' },
-            { name: 'configuration', title: 'Configuration', url: '/configuration', avatar: 'settings' },
-            { name: 'insurance-check', title: 'Check Insurance', url: '/insurance/check', avatar: 'verified_user' },
-            { name: 'requisitions', title: 'Requisitions', url: '/requisitions', avatar: 'chrome_reader_mode' },
-            { name: 'pending-tasks', title: 'Pending Tasks', url: '/pending-tasks', avatar: 'list' },
+            // { name: 'create-requisition', title: 'Create Requisition', url: '/insurance/create-requisition', avatar: 'local_hospital' },
+            // { name: 'dashboard', title: 'Dashboard', url: '/dashboard', avatar: 'dashboard' },
+            { name: 'users-list', title: 'Users-List', url: '/users-list', avatar: 'person' },
+            { name: 'users-create', title: 'create', url: '/create', avatar: 'settings' },
+            { name: 'users-create-id', title: 'users-create-id', url: '/create/:id', avatar: 'verified_user' },
+            // { name: 'requisitions', title: 'Requisitions', url: '/requisitions', avatar: 'chrome_reader_mode' },
+            // { name: 'pending-tasks', title: 'Pending Tasks', url: '/pending-tasks', avatar: 'list' },
         ],
-
-        'physician': [
-            { name: 'create-requisition', title: 'Create Requisition', url: '/insurance/create-requisition', avatar: 'local_hospital' },
-            { name: 'dashboard', title: 'Dashboard', url: '/dashboard', avatar: 'dashboard' },
-            { name: 'requisitions', title: 'Requisitions', url: '/requisitions', avatar: 'chrome_reader_mode' },
-        ],
-
-        'office_manager': [
-            { name: 'create-requisition', title: 'Create Requisition', url: '/insurance/create-requisition', avatar: 'local_hospital' },
-            { name: 'dashboard', title: 'Dashboard', url: '/dashboard', avatar: 'dashboard' },
-            { name: 'insurance-check', title: 'Check Insurance', url: '/insurance/check', avatar: 'verified_user' },
-        ],
-        'phlebotomist': [
-            { name: 'create-requisition', title: 'Create Requisition', url: '/insurance/create-requisition', avatar: 'local_hospital' },
-            { name: 'dashboard', title: 'Dashboard', url: '/dashboard', avatar: 'dashboard' },
-            { name: 'insurance-check', title: 'Check Insurance', url: '/insurance/check', avatar: 'verified_user' },
-            { name: 'requisitions', title: 'Requisitions', url: '/requisitions', avatar: 'chrome_reader_mode' },
-        ],
-        'insurance_verification': [
-            { name: 'insurance-check', title: 'Check Insurance', url: '/insurance/check', avatar: 'verified_user' }
-        ]
     };
 
     getPermissions(role: string): Array<Permission> {
@@ -49,7 +28,7 @@ export class RolesService {
         if (!selectedRole) {
             throw Error('Role with `${role}` name not found');
         }
-
+        console.log("Inside getPermissions",selectedRole);
         return selectedRole;
     }
 

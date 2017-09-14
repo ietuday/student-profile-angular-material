@@ -24,7 +24,8 @@ export enum ApiEndpointType {
 @Injectable()
 export class EndpointService {
 
-  private readonly baseUrl: string = 'http://dev-api.ereq.io';
+  // private readonly baseUrl: string = 'http://dev-api.ereq.io';
+  private readonly baseUrl: string = 'http://10.10.20.205:8002'; 
   private endpoints: Array<IApiEndpoint> = [];
 
   constructor() {

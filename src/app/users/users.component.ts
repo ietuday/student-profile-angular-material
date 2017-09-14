@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef,ViewEncapsulation } from '@angular/core';
 import { ApiService } from '../core/services';
 import { User } from './../shared/user.modal';
 import { MdDialogRef, MdDialog, MdSnackBar } from '@angular/material';
@@ -13,6 +13,8 @@ declare const ResizeSensor;
 })
 export class UsersComponent implements OnInit {
 
+  filteredUsers:User[] = new Array<User>();
+  searchNameText = '';
   // Pagination
 
   pageSizeOptions = [5, 10, 15, 20, 25, 30];
@@ -58,10 +60,10 @@ export class UsersComponent implements OnInit {
       .subscribe(response => {
         this.isLoading = false;
         this.users = response.users;
+        this.filteredUsers = this.users;
         console.log("Inside loadUsers",this.users);
         this.totalCount = response.usersCount;
         console.log("Total Count",this.totalCount);
-        // setTimeout(() => this.resize(), 10);
       });
   }
 
@@ -75,24 +77,6 @@ export class UsersComponent implements OnInit {
     this.offset = 0;
     this.loadUsers();
 
-  }
-  private resize() {
-
-    const cells = this.tbody.nativeElement.children[0].children;
-    this.cellWidths = [];
-
-    for (const cell of cells) {
-      this.cellWidths.push(cell.offsetWidth);
-    }
-
-    const resizeSensor = new ResizeSensor(this.tbody.nativeElement, () => {
-      this.cellWidths.length = 0;
-      if (this.tbody.nativeElement.children[0]) {
-        for (const cell of cells) {
-          this.cellWidths.push(cell.offsetWidth);
-        }
-      }
-    });
   }
 
   openDialog(user: User): void {
@@ -111,6 +95,83 @@ export class UsersComponent implements OnInit {
       }
     });
   }
+
+  onSearchUser(searchQuery: string): void {
+    console.log(searchQuery);
+    if (searchQuery.length > 0) {
+      console.log("Inside If",searchQuery.length)
+      this.filteredUsers = this.users.filter(user => user.firstName.toLowerCase().indexOf(searchQuery.toLowerCase()) >= 0);
+      console.log("After Applying Filter",this.filteredUsers);
+    } else {
+      console.log("Inside Else",searchQuery.length)
+      this.filteredUsers = this.users;
+      console.log("Inside Else :filteredUsers ",this.filteredUsers)
+
+    }
+  }
+
+  sortTable(n) {
+  var table,
+    rows,
+    switching,
+    i,
+    x,
+    y,
+    shouldSwitch,
+    dir,
+    switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc";
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < rows.length - 1; i++) { //Change i=0 if you have the header th a separate table.
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount++;
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
 
   private deleteUser(user): void {
     this.isLoading = true;

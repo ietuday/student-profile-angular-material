@@ -1,59 +1,95 @@
-<div fxLayout="row" fxLayoutAlign="center center" style="margin: 24px 0;">
-    <md-card fxFlex="60">
-        <md-card-title> {{isEditMode?"Update": "Create"}} User</md-card-title>
+<div class="editBackground">
+<div  style="margin: 24px 0;text-align: center;">
 
-        <md-divider></md-divider>
-
-        <div fxLayout="row" class="warning-color" *ngIf="isWarning">
-            <div fxFlex="8" fxLayoutAlign="center center">
+        <div class="warning-color" *ngIf="isWarning">
+            <div>
                 <md-icon color="warn">warning</md-icon>
             </div>
-            <div fxFlex *ngIf="!validationError"> {{resultMessage}}</div>
-            <div fxFlex *ngIf="validationError">
+            <div  *ngIf="!validationError" style="color: white;"> {{resultMessage}}</div>
+            <div  *ngIf="validationError">
                 <ul>
                     <li *ngFor="let error of validationError">
                         {{error}}
                     </li>
                 </ul>
             </div>
-            <div fxFlex="5" fxLayoutAlign="center center">
+            <div>
                 <md-icon color="warn" (click)="isWarning = false" style="cursor:pointer">cancel</md-icon>
             </div>
 
 
         </div>
 
-        <md-card-content fxLayout="column">
-            <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-                <div fxLayout="row">
+                <div class="wrap">
+                        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                            <fieldset>
+                                <legend><h3>{{isEditMode?"Update": "Create"}} User</h3></legend>
+                                <div>
+                                        <img class="img-circle" [attr.src]='file_srcs' alt="Select profile Image" />
+                                        <input type="file" name="profile_img" required   style="border: none;width: 200px;color: white;"
+                                        (change)="fileChange(input)" #input />
+                                </div>
+                                    <input  name="firstName" type="text" [disabled]="isLoading" [(ngModel)]="user.firstName" placeholder="First Name" required/>
+                                    <input  name="lastName" type="text" [disabled]="isLoading" [(ngModel)]="user.lastName" placeholder="Last Name" required/>
+                                    <input  name="email" type="email" [email]="true" (blur)="validateEmail($event.target.value)" [disabled]="isLoading" [(ngModel)]="user.email" placeholder="Email" required/>
+                                    <input  name="phone" type="number" [disabled]="isLoading" [(ngModel)]="user.phone" placeholder="Phone" required minlength="8"/>
+                                    <input  type="password" name="password" [disabled]="isLoading" [(ngModel)]="user.password" placeholder="Password" required minlength="8">
+                                    <input  type="password" name="confirmPassword" [disabled]="isLoading" [(ngModel)]="user.confirmPassword" placeholder="ConfirmPassword" required minlength="8">
+                                    <md-hint *ngIf="user.password?.length <= 8">Password sholud be minimum 8 characters</md-hint><br/>
+                                    <md-hint *ngIf="user.password !== user.confirmPassword" style="color:red">Passwords do not match</md-hint>
+                            <div class="input-row" style="margin-top: 5%;">
+                                    <md-select name="role" [disabled]="isLoading" style="width: 200px;color:white" [(ngModel)]="user.role" placeholder="Role" required>
+                                        <md-option *ngFor="let role of roles" [value]="role.id"> {{role.label}}</md-option>
+                                    </md-select>
+                
+                                    <md-slide-toggle  [disabled]="isLoading" name="isActive" [(ngModel)]="user.isActive" style="margin-left: 10%;color: white;font-weight: bolder;">
+                                        Active
+                                    </md-slide-toggle>
+                            </div>
+                            <div style="margin-top: 10%;">
+                                    <button md-raised-button color="accent"  [disabled]="isSubmitting" type="submit"> {{isSubmitting ? isEditMode ? "Updating..." : "Creating..." :isEditMode ? "Update" : "Create"}}</button>
+                                    <button md-raised-button [disabled]="isSubmitting" [routerLink]="['/users-list']">Cancel</button>
+                            </div>
+
+                            
+                        </fieldset>
+                        </form>
+                    </div>
+
+        
+            <!-- <form #form="ngForm" (ngSubmit)="onSubmit(form)"> -->
+
+                    
+                
+                <!-- <div > -->
                     <!-- Profile Image -->
-                    <div fxLayout="column" fxFlex="20" class="flexitem">
+                    <!-- <div style="margin-bottom: 20px;">
                         <img class="img-circle" [attr.src]='file_srcs' alt="Select profile Image" />
                         <input type="file" name="profile_img" required (change)="fileChange(input)" #input />
                     </div>
-                    <div fxFlex="80" fxFlex.gt-md="76" fxHide.lg="true" fxHide.gt-md="false" fxFlexOffset.gt-md="30" fxFlexOffset.gt-sm="35" fxFlexOffset="1">
-                        <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="10px" fxLayoutAlign="end">
-                            <md-input-container fxFlex>
+                    <div>
+                        <div>
+                            <md-input-container>
                                 <input mdInput name="firstName" [disabled]="isLoading" [(ngModel)]="user.firstName" placeholder="First Name" required>
                             </md-input-container>
-                            <md-input-container fxFlex>
+                            <md-input-container style="margin-left: 10%;">
                                 <input mdInput name="lastName" [disabled]="isLoading" [(ngModel)]="user.lastName" placeholder="Last Name" required>
                             </md-input-container>
                         </div>
-                        <div fxLayout="column" fxLayout.gt-md="row" class="input-row" fxLayoutGap="10px">
-                            <md-input-container fxFlex>
+                        <div>
+                            <md-input-container>
                                 <input mdInput name="email" type="email" [email]="true" (blur)="validateEmail($event.target.value)" [disabled]="isLoading" [(ngModel)]="user.email" placeholder="Email" required>
                             </md-input-container>
-                            <md-input-container fxFlex>
+                            <md-input-container style="margin-left: 10%;">
                                 <input mdInput name="phone" type="number" [disabled]="isLoading" [(ngModel)]="user.phone" placeholder="Phone" required minlength="8">
                             </md-input-container>
                         </div>
-                        <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="10px">
-                            <md-input-container fxFlex>
+                        <div>
+                            <md-input-container>
                                 <input mdInput type="password" name="password" [disabled]="isLoading" [(ngModel)]="user.password" placeholder="Password" required minlength="8">
                                 <md-hint *ngIf="user.password?.length <= 8 ">Password sholud be minimum 8 characters</md-hint>
                             </md-input-container>
-                            <md-input-container fxFlex>
+                            <md-input-container style="margin-left: 10%;">
                                 <input mdInput type="password" name="confirmPassword" [disabled]="isLoading" [(ngModel)]="user.confirmPassword" placeholder="ConfirmPassword" required minlength="8">
                                 <md-hint *ngIf="user.password !== user.confirmPassword" style="color:red">Passwords do not match</md-hint>
                             </md-input-container>
@@ -62,23 +98,21 @@
 
                 </div>
 
-                <div fxLayout="column" fxFlexOffset="20" fxFlexOffset.gt-md="30" fxFlexOffset.gt-sm="35" fxLayout.gt-md="row" class="input-row">
-                    <md-select name="role" [disabled]="isLoading" [(ngModel)]="user.role" placeholder="Role" fxFlex required>
+                <div class="input-row">
+                    <md-select name="role" [disabled]="isLoading" style="width: 312px;" [(ngModel)]="user.role" placeholder="Role" required>
                         <md-option *ngFor="let role of roles" [value]="role.id"> {{role.label}}</md-option>
                     </md-select>
 
-                    <md-slide-toggle fxFlexOffset="7" [disabled]="isLoading" name="isActive" [(ngModel)]="user.isActive" fxFlex>
+                    <md-slide-toggle  [disabled]="isLoading" name="isActive" [(ngModel)]="user.isActive" style="margin-left: 10%;">
                         Active
                     </md-slide-toggle>
                 </div>
 
-                <div fxLayout="column" fxLayoutAlign="end center" fxLayout.gt-md="row" class="input-row">
-                    <button md-raised-button color="accent" fxFlex="17" [disabled]="isSubmitting" type="submit"> {{isSubmitting ? isEditMode ? "Updating..." : "Creating..." :isEditMode ? "Update" : "Create"}}</button>
+                <div class="input-row" style="margin-top: 5%;">
+                    <button md-raised-button color="accent"  [disabled]="isSubmitting" type="submit"> {{isSubmitting ? isEditMode ? "Updating..." : "Creating..." :isEditMode ? "Update" : "Create"}}</button>
                     <button md-raised-button [disabled]="isSubmitting" [routerLink]="['/users-list']">Cancel</button>
-                </div>
+                </div> -->
 
-            </form>
-        </md-card-content>
-
-    </md-card>
+            <!-- </form> -->
+</div>
 </div>
