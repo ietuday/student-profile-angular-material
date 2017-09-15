@@ -4,9 +4,10 @@ import { UsersComponent } from './users/users.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './core/services';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 export const routes: Routes = [
-    { path: '', component: LoginComponent },    
+    { path: '', component: UserProfileComponent },    
     { path: 'login', component: LoginComponent },
     { path: 'users-list', component: UsersComponent,},
     { path: 'create', component: EditUserComponent,},

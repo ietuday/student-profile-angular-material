@@ -103,6 +103,18 @@ input[type=submit]:hover{
   background:#FF8652;
 }
 
+.mat-select-value-text{
+  color: white !important;
+}
+
+.mat-select-placeholder.mat-floating-placeholder{
+  color: white;
+}
+
+.mat-select-arrow{
+  color: white;
+}
+
 
 
 

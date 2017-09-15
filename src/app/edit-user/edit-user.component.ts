@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef,ViewEncapsulation } from '@angular/core';
 import { ApiService } from '../core/services';
 import { User } from './../shared/user.modal';
 import { Resource } from './../shared/resource.modal';
@@ -8,7 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css']
+  styleUrls: ['./edit-user.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class EditUserComponent{
 

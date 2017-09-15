@@ -1,0 +1,503 @@
+<md-toolbar color="primary">
+  <span>App title</span>
+  <span class="filler"></span>
+  <span> right aligned text</span>
+</md-toolbar>
+<md-sidenav-container class="main-container">
+  <md-sidenav class="main-sidenav" #sidenav mode="side" opened="true">
+    <div class="nav-wrapper">
+      <md-nav-list>
+        <md-list-item *ngFor="let link of [1,2,3,4,5,6,7,8,9,10]">
+          <a md-line href="...">nav list item {{ link }}</a>
+          <button md-icon-button>
+              icon
+            </button>
+        </md-list-item>
+      </md-nav-list>
+      <md-nav-list>
+        <md-list-item *ngFor="let link of [1,2,3,4,5,6,7,8,9,10]">
+          <a md-line href="...">nav list item 1{{ link }}</a>
+          <button md-icon-button>
+              icon
+            </button>
+        </md-list-item>
+      </md-nav-list>
+      <md-nav-list>
+        <md-list-item *ngFor="let link of [1,2,3,4,5,6,7,8,9,10]">
+          <a md-line href="...">nav list item 2{{ link }}</a>
+          <button md-icon-button>
+              icon
+            </button>
+        </md-list-item>
+      </md-nav-list>
+
+    </div>
+  </md-sidenav>
+  <div class="content-wrapper">
+    <div class="main-content">
+      <md-card style="height: 40vh;padding: 0;">
+        <div>
+          <img src="assets/img/avatars/user-profile-bg.jpg" class="user-profile-back" alt="image caption">
+        </div>
+        <div>
+          <div class="user-profile-pic-section">
+            <img src="assets/img/avatars/male-user.png" class="user-profile-pic" alt="image caption" />
+
+          </div>
+          <div class="user-profile-name-section">
+            <h4 class="user-profile-name">James Smith</h4>
+            <p class="user-prof">Student</p>
+          </div>
+
+          <div class="user-profile-Stream-section">
+            <h4 class="user-profile-Stream">Computer Science</h4>
+            <p class="user-prof-study">BE</p>
+          </div>
+
+          <div class="user-profile-project-section">
+            <h4 class="user-project-count">6</h4>
+            <p class="user-project-project">Project Completed</p>
+          </div>
+
+          <div class="user-profile-rating-section">
+            <h4 class="user-profile-rate">A++</h4>
+            <p class="user-rate">Overall Rating</p>
+          </div>
+
+        </div>
+
+        <div class="user-profile-right-icon">
+          <md-icon style="font-size: 71px;color: #ff4081;">account_circle</md-icon>
+        </div>
+
+      </md-card>
+
+      <div class="user-profile-tabs-section">
+        <md-tab-group #tabGroup>
+          <md-tab label="Profile" class="user-profile-tabs">
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>James Smith</md-card-title>
+                  <md-card-subtitle>Student : BE,3rd Year </md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/james-smmith.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <md-card style="background: #03a9f4;">
+                    <md-card-title style="color: #fff;font-size: 24px;font-weight: 300;">About Me</md-card-title>
+                  </md-card>
+                  <p>
+                    My name is James Smith. I'm 3rd year Student of Computer Science in Cooper Union for the Advancement of Science and Art.
+                  </p>
+
+                  <ul id="profile-page-about-details" class="collection z-depth-1">
+                    <li class="collection-item">
+                      <div class="row" (click)="goToProject($event)">
+                        <div class="col s5 grey-text darken-1">
+                          <md-icon>work</md-icon> Project</div>
+                        <div class="col s7 grey-text text-darken-4 right-align">Blood Donation,Data Mining,Face Recognition, Fuzzy Keyword Search,Online Bus Reservation System,Graphical
+                          Password
+                        </div>
+                      </div>
+                    </li>
+                    <li class="collection-item">
+                      <div class="row">
+                        <div class="col s5 grey-text darken-1">
+                          <md-icon>assessment</md-icon> Skills</div>
+                        <div class="col s7 grey-text text-darken-4 right-align">HTML5, CSS3,Javascript,ANgular JS, EmberJS, NodeJS, MongoDB,PHP, SQL</div>
+                      </div>
+                    </li>
+                    <li class="collection-item">
+                      <div class="row">
+                        <div class="col s5 grey-text darken-1">
+                          <md-icon>home</md-icon> Lives in</div>
+                        <div class="col s7 grey-text text-darken-4 right-align">NY, USA</div>
+                      </div>
+                    </li>
+                    <li class="collection-item">
+                      <div class="row">
+                        <div class="col s5 grey-text darken-1">
+                          <md-icon>date_range</md-icon> Birth date</div>
+                        <div class="col s7 grey-text text-darken-4 right-align">9th June, 1991</div>
+                      </div>
+                    </li>
+                  </ul>
+
+
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+            <div style="width: 66.66%;float: left;">
+              <div style="display: block">
+                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+                  [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                </canvas>
+              </div>
+              <!-- <button (click)="randomize()">Update</button> -->
+            </div>
+
+          </md-tab>
+          <md-tab label="Projects" class="user-profile-tabs">
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Blood Donation</md-card-title>
+                  <md-card-subtitle>Project 1</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/bravoblooddonor.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Data Mining</md-card-title>
+                  <md-card-subtitle>Project 2</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/data-mining.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Face Recognition</md-card-title>
+                  <md-card-subtitle>Project 3</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/face-recog.png" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+            <div style="width: 100%;height: 10px;float: left;">&nbsp; </div>
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Fuzzy Keyword Search</md-card-title>
+                  <md-card-subtitle>Project 4</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/fuzzy-keyword-search.png" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Graphical Password</md-card-title>
+                  <md-card-subtitle>Project 5</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/graphical-password.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Online Bus Reservation System</md-card-title>
+                  <md-card-subtitle>Project 6</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/online-bus-reservation-system.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+          </md-tab>
+
+          <md-tab label="Groups" class="user-profile-tabs">
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>High School Theater Program</md-card-title>
+                  <md-card-subtitle>Theater</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/body_anime.png" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Marching Band</md-card-title>
+                  <md-card-subtitle>Music</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/body_band.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Blogging</md-card-title>
+                  <md-card-subtitle>Technology</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/body_blog.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+            <div style="width: 100%;height: 10px;float: left;">&nbsp; </div>
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Community Youth Board</md-card-title>
+                  <md-card-subtitle>Government</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/body_government.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Habitat for Humanity</md-card-title>
+                  <md-card-subtitle>Community</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/body_habitat.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Baseball</md-card-title>
+                  <md-card-subtitle>Sports</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/body_lacrosse.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+            <div style="width: 100%;height: 10px;float: left;">&nbsp; </div>
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>School or local radio station</md-card-title>
+                  <md-card-subtitle>Media</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/body_news.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Junior ROTC</md-card-title>
+                  <md-card-subtitle>Military</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/body_rotc.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Engineering Club</md-card-title>
+                  <md-card-subtitle>Science</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/body_science_bowl.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+            <div style="width: 100%;height: 10px;float: left;">&nbsp; </div>
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>South Asian Student Society</md-card-title>
+                  <md-card-subtitle>Cultural and Language</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/body_sushi.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+            <div style="width: 33.33%;float: left;">
+              <md-card class="example-card">
+                <md-card-header>
+                  <div md-card-avatar class="example-header-image"></div>
+                  <md-card-title>Entrepreneurship Club</md-card-title>
+                  <md-card-subtitle>Special Interest</md-card-subtitle>
+                </md-card-header>
+                <img md-card-image src="assets/img/avatars/body_trains.jpg" alt="Photo of a Shiba Inu" style="width: 450px;height: 250px;">
+                <md-card-content>
+                  <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
+                    very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                  </p>
+                </md-card-content>
+                <md-card-actions>
+                  <button md-button>Detail</button>
+                  <button md-button>SHARE</button>
+                </md-card-actions>
+              </md-card>
+            </div>
+          </md-tab>
+          <md-tab label="Finances" class="user-profile-tabs">Finances</md-tab>
+        </md-tab-group>
+      </div>
+    </div>
+  </div>
+</md-sidenav-container>
